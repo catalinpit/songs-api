@@ -43,7 +43,7 @@ const addSong = (req, res) => {
 
 const updateSong = (req, res) => {
     pool.query(
-        `UPDATE songs SET(name, genre, released, artists) = ('${req.body.name}', '${req.body.genre}', '${req.body.released}', ($1))`, [req.body.artists], (error, results) => {
+        `UPDATE songs SET(name, genre, released, artists) = ('${req.body.name}', '${req.body.genre}', '${req.body.released}', ($1)) WHERE id=${req.params.id}`, [req.body.artists], (error, results) => {
             if (error) throw error;
 
             res.status(200).json(`Song ${req.params.id} updated successfully!`);
