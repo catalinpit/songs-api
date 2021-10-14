@@ -12,7 +12,18 @@ const getAllSongs = (req, res) => {
 
 const getSong = (req, res) => {
     pool.query(
-        `SELECT * FROM songs WHERE '${req.params.artist}'=ANY(artists)`, (error, results) => {
+        `SELECT * FROM songs WHERE id='${req.params.id}'`, (error, results) => {
+            if (error) throw error;
+
+            res.status(200).json(results.rows);
+        }
+    );
+};
+
+
+const getSongsFromArtist = (req, res) => {
+    pool.query(
+        `SELECT * FROM songs WHERE '${req.params.name}'=ANY(artists)`, (error, results) => {
             if (error) throw error;
 
             res.status(200).json(results.rows);
@@ -25,7 +36,7 @@ const addSong = (req, res) => {
         `INSERT INTO songs (name, genre, released, artists) VALUES ('${req.body.name}', '${req.body.genre}', '${req.body.released}', ($1))`, [req.body.artists], (error, results) => {
             if (error) throw error;
 
-            res.status(200).json(results.rows);
+            res.status(200).json(`Song added successfully!`);
         }
     );
 };
@@ -53,6 +64,7 @@ const deleteSong = (req, res) => {
 module.exports = {
     getAllSongs,
     getSong,
+    getSongsFromArtist,
     addSong,
     updateSong,
     deleteSong
