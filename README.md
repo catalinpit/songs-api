@@ -117,3 +117,22 @@ https://songs-api-cp.herokuapp.com/songs/:id
 `:id` represents the ID of the song. An example endpoint would be "*https://songs-api-cp.herokuapp.com/songs/1*". 
 
 Replace the `:id` with the ID of the song you want to delete.
+
+## Run the project locally
+
+If you want to run the project locally, create an `.env` file with the information from `.env.sample`. Then add your database details.
+
+Once you have the database and `.env` file ready, create a table with the following fields:
+1. ID - PRIMARY KEY
+2. name VARCHAR(30)
+3. genre VARCHAR(30)
+4. released INTEGER
+5. artists TEXT[]
+
+Lastly, after everything's set up, run:
+
+```
+node index.js
+```
+
+To start the application.
