@@ -10,6 +10,6 @@ app.get('/', (req, res) => {
     res.json({ message: 'Hello world!' });
 });
 
-app.listen(3123, () => {
+app.listen(process.env.PORT || 3123, () => {
     console.log('It took off!');
 });
